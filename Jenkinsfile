@@ -1,6 +1,6 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/damodaranj/my-app.git'
+     git 'https://github.com/VickyDev-07/project.git'
    }
    stage('Compile-Package'){
 
@@ -15,18 +15,18 @@ node{
 	        }
 	    }
    stage('Build Docker Imager'){
-   sh 'docker build -t saidamo/myweb:0.0.2 .'
+   sh 'docker build -t vickydevendran/myweb:0.0.2 .'
    }
    stage('Docker Image Push'){
    withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
-   sh "docker login -u saidamo -p ${dockerPassword}"
+   sh "docker login -u vivckydevendran -p ${dockerPassword}"
     }
-   sh 'docker push saidamo/myweb:0.0.2'
+   sh 'docker push vickydevendran/myweb:0.0.2'
    }
    stage('Nexus Image Push'){
-   sh "docker login -u admin -p admin123 13.233.6.106:8083"
-   sh "docker tag saidamo/myweb:0.0.2 13.233.6.106:8083/damo:1.0.0"
-   sh 'docker push 13.233.6.106:8083/damo:1.0.0'
+   sh "docker login -u admin -p admin123 13.233.6.106:8085"
+   sh "docker tag vickydevendran/myweb:0.0.2 13.233.6.106:8085/vicky:1.0.0"
+   sh 'docker push 13.233.6.106:8085/damo:1.0.0'
    }
    stage('Remove Previous Container'){
 	try{
